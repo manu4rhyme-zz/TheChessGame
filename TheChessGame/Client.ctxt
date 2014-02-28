@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=b\ tF\ tF1
+comment0.target=Client(javax.swing.JButton,\ javax.swing.JTextField,\ javax.swing.JTextField)
+comment1.params=
+comment1.target=void\ run()
+comment2.params=m\ n\ x\ y
+comment2.target=void\ doMoveChanges(int,\ int,\ int,\ int)
+numComments=3

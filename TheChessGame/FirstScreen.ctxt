@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=FirstScreen()
+comment1.params=ae
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=
+comment2.target=boolean\ goodInput()
+comment3.params=
+comment3.target=void\ tFieldLen()
+comment4.params=ke
+comment4.target=void\ keyTyped(java.awt.event.KeyEvent)
+numComments=5

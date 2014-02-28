@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=
+comment0.target=SetUp()
+comment1.params=button\ n\ tText\ locX\ locY\ X\ Y\ b\ f\ mne\ i
+comment1.target=void\ setUpButton(javax.swing.JButton,\ java.lang.String,\ java.lang.String,\ int,\ int,\ int,\ int,\ java.awt.Color,\ java.awt.Color,\ int,\ javax.swing.ImageIcon)
+comment2.params=tf\ locX\ locY\ sizX\ sizY\ b\ f\ t\ ena\ frmMid
+comment2.target=void\ setUpTextField(javax.swing.JTextField,\ int,\ int,\ int,\ int,\ java.awt.Color,\ java.awt.Color,\ java.lang.String,\ boolean,\ boolean)
+comment3.params=l\ t\ locX\ locY\ sizX\ sizY\ b\ f\ font
+comment3.target=void\ setUpLabel(javax.swing.JLabel,\ java.lang.String,\ int,\ int,\ int,\ int,\ java.awt.Color,\ java.awt.Color,\ java.awt.Font)
+comment4.params=panel\ locX\ locY\ sizX\ sizY\ b\ tb
+comment4.target=void\ setUpPanel(javax.swing.JPanel,\ int,\ int,\ int,\ int,\ java.awt.Color,\ javax.swing.border.TitledBorder)
+comment5.params=frame\ title\ sizX\ sizY\ aI\ a\ b
+comment5.target=void\ setUpFrame(javax.swing.JFrame,\ java.lang.String,\ int,\ int,\ java.awt.Image,\ boolean,\ boolean)
+comment6.params=path
+comment6.target=javax.swing.ImageIcon\ imageSetUp(java.lang.String)
+comment7.params=title\ c
+comment7.target=javax.swing.border.TitledBorder\ titledBorderSetup(java.lang.String,\ java.awt.Color)
+numComments=8

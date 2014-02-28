@@ -10,10 +10,10 @@ It is a multiplayer Chess Game that can be played on LAN and over the internet, 
 The latest jre is required to run the game which can be downloaded [here](https://www.java.com/en/download/)
 
 There are two methods of running the game,
-1. Run the .jar file
+* Run the .jar file
 	* Simply double click or
 	* in CMD navigate to .jar file and type `java -jar tcg.jar`
-2. in CMD navigate to main game folder and type `java main.class`
+* in CMD navigate to main game folder and type `java main.class`
 
 
 ---

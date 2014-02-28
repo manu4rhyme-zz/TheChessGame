@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=AskIP()
+comment1.params=ae
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=
+comment2.target=java.lang.String\ goodInput()
+comment3.params=tf\ badChars
+comment3.target=void\ tFieldNum(javax.swing.JTextField,\ java.lang.String)
+comment4.params=ke
+comment4.target=void\ keyTyped(java.awt.event.KeyEvent)
+numComments=5
