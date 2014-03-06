@@ -1,7 +1,7 @@
-/*  DEVELOPED BY    :                AVINASH AGARWAL  
- *  DATE                        :                1st April, 2011
+/*  DEVELOPED BY    :                AVINASH AGARWAL  && SHIVAM TYAGI
+ *  DATE                        :                25th February, 2014
  *  PLATFORM             :                JAVA 1.6.0_24-b07
- *   PROGRAM             :                Multiple User Chat Messenger
+ *   PROGRAM             :                The Chess Game
  */
 
 import javax.swing.JFrame;
@@ -30,13 +30,14 @@ class MainWin implements Runnable, ActionListener
 {
 
     protected JTextField inp;
-    private JScrollPane sp, sp2;
+    protected JScrollPane sp, sp2;
     protected JTextPane tp, tp2;
     protected JButton[][] situ;
     char myColorFV,opColorFV;
     boolean moved, underCheck;
     String selectedPiece;
     int sPCX, sPCY, cCM;
+    protected Color ctpc;
 
     MainWin()
     {
@@ -44,7 +45,7 @@ class MainWin implements Runnable, ActionListener
         SetUp.frame.remove(SetUp.panel[1]);
 
         SetUp.panel[2] = new JPanel();
-        SetUp.setUpPanel(SetUp.panel[2], 0, 0, 1240, 715, SetUp.sColor, SetUp.titledBorderSetup("The Chess Game made by Avinash aka »Â†G«", Color.GREEN));
+        SetUp.setUpPanel(SetUp.panel[2], 0, 0, 1240, 715, SetUp.sColor, SetUp.titledBorderSetup("The Chess Game vBETA", Color.GREEN));
 
         inp = new JTextField();
         SetUp.setUpTextField(inp,680, 650, 545, 25, Color.BLACK, Color.WHITE , "", true, false);
@@ -101,7 +102,7 @@ class MainWin implements Runnable, ActionListener
                     x, y, 82, 82, new Color(0,25,30), new Color(0,25,30), KeyEvent.VK_C, temp);
                 situ[i][j].setBorder(BorderFactory.createEmptyBorder());
                 //situ[i][j].setContentAreaFilled(false);
-                situ[i][j].addActionListener(this);
+                if(!SetUp.isSpec)situ[i][j].addActionListener(this);
 
                 if(SetUp.myColor.equals("WHITE")) situ[i][j].setActionCommand(i + " " + j + " f");
                 else situ[i][j].setActionCommand(" ");
@@ -170,7 +171,7 @@ class MainWin implements Runnable, ActionListener
         if(SetUp.isServer)
         {   
             tp.setText("My IP : " + SetUp.HostIP + ", My Port : " + SetUp.HostPort + "\n");
-            tp2.setText(SetUp.name + "\n");
+            SetUp.insertColorStrings(SetUp.name + "\n", SetUp.colors[0], true, tp2);
             SetUp.names[0] = SetUp.name;
         }
         else tp.setText("Host IP : " + SetUp.HostIP + ", Host Port : " + SetUp.HostPort + "\n");
@@ -203,12 +204,14 @@ class MainWin implements Runnable, ActionListener
                     {
                         String st = inp.getText().trim();
                         if(st.length() > 0)
-                        {
-                            st = SetUp.name +"  :  "+ st;
-                            String str = tp.getText()+"\n" + st;
-                            tp.setText(str);
-                            if(SetUp.isServer) Server.sendToAll(st, -1);
+                        {                            
+                            if(SetUp.isServer)
+                                Server.sendToAll(st + "0", -1);
+                            
                             else Client.pw.println(st+Client.myClientNum);
+                            
+                            SetUp.insertColorStrings("\n" + SetUp.name + " : ", ctpc, true, tp);
+                            SetUp.insertColorStrings(st, ctpc,false, tp);
                         }                                                                                            
                         inp.setText("");                      
                     }
@@ -232,6 +235,7 @@ class MainWin implements Runnable, ActionListener
                                 SetUp.pWs[i].close();
                                 SetUp.br[i].close();
                                 SetUp.serverSocket.close();
+                                SetUp.isServerRunning = false;
                             }
                         }
                         else
@@ -283,7 +287,7 @@ class MainWin implements Runnable, ActionListener
             SetUp.situation[m][n] = myColorFV+selectedPiece+k;
             SetUp.situation[sPCX][sPCY] = (SetUp.situation[sPCX][sPCY].charAt(SetUp.situation[sPCX][sPCY].length()-1) == 'w') ? "w" : "b";
 
-            if(SetUp.isServer) SetUp.pWs[0].println("  TCGv1.0 MOVE " + (7-m) + " " + (7-n) + " " + (7-sPCX) + " " + (7-sPCY));
+            if(SetUp.isServer) Server.sendToAll("  TCGv1.0 MOVE " + (7-m) + " " + (7-n) + " " + (7-sPCX) + " " + (7-sPCY), -1);
             else Client.pw.println("  TCGv1.0 MOVE " + (7-m) + " " + (7-n) + " " + (7-sPCX) + " " + (7-sPCY) +""+Client.myClientNum);
 
             for(int i = 0; i < 8; i++)

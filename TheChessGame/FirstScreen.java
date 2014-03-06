@@ -1,7 +1,7 @@
 /*  DEVELOPED BY    :                AVINASH AGARWAL  
- *  DATE                        :                1st April, 2011
+ *  DATE                        :                21st February, 2014
  *  PLATFORM             :                JAVA 1.6.0_24-b07
- *   PROGRAM             :                Multiple User Chat Messenger
+ *   PROGRAM             :                The Chess Game
  */
 
 import javax.swing.JFrame;
@@ -44,7 +44,7 @@ class FirstScreen implements ActionListener
                     SetUp.setUpFrame(SetUp.frame, "Host or Join a Game", 400, 350, SetUp.appImage, false, true);
                     
                     SetUp.panel[0] = new JPanel();
-                    SetUp.setUpPanel(SetUp.panel[0], 0, 0, 400, 350, SetUp.sColor, SetUp.titledBorderSetup("The Chess Game made by Avinash aka »Â†G«", Color.YELLOW));
+                    SetUp.setUpPanel(SetUp.panel[0], 0, 0, 400, 350, SetUp.sColor, SetUp.titledBorderSetup("The Chess Game vBETA", Color.YELLOW));
                     
                     tf = new JTextField();
                     SetUp.setUpTextField(tf, 160, 33, 200, 25, Color.BLACK, Color.WHITE, "Enter your name here.", true, true);

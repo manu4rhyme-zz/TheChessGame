@@ -1,6 +1,6 @@
 /*  DEVELOPED BY    :                AVINASH AGARWAL  
- *  DATE                        :                
- *  PLATFORM             :                
+ *  DATE                        :                20th February, 2014
+ *  PLATFORM             :                JAVA 1.6.0_24-b07
  *   PROGRAM             :                The Chess Game
  */
 
@@ -9,6 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JTextPane;
+
+import javax.swing.text.StyledDocument;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.Style;
+import javax.swing.text.BadLocationException;
+
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.border.TitledBorder;
@@ -48,13 +57,16 @@ class SetUp
         protected static BufferedReader br[];
         protected static int clientSocketNum;
         protected static int HostPort;  
+        protected static int moveNum;
         
-        protected static boolean isServer, hostClosed, isSpec;
+        protected static boolean isServer, hostClosed, isSpec, isServerRunning, isClientListening;
         
         protected static Color sColor;
         protected static Font normal;
         
         protected static JLabel status;
+        
+        protected static Color[] colors;
         
         static
         {
@@ -100,6 +112,7 @@ class SetUp
                 
                 clientSocket = new Socket[50];
                 clientSocketNum = 0;
+                moveNum = 0;
                 
                 isServer = false;
                 hostClosed = false;
@@ -114,6 +127,19 @@ class SetUp
                 
                 pWs = new PrintWriter[100];
                 br = new BufferedReader[100];
+                
+                isServerRunning = false;
+                isClientListening = true;
+                
+                colors = new Color[8];
+                colors[0] = new Color(181, 137 ,  0);
+                colors[1] = new Color(203,  75 , 22);
+                colors[2] = new Color(220,  50 , 47);
+                colors[3] = new Color(211,  54 ,130);
+                colors[4] = new Color(108, 113, 196);
+                colors[5] = new Color(38, 139, 210);
+                colors[6] = new Color(42, 161, 152);
+                colors[7] = new Color(133, 153,   0);        
         }
         
         
@@ -123,6 +149,13 @@ class SetUp
         }
 
         
+        protected static void setUpComboBox(JComboBox cb, int locX, int locY, int sizX, int sizY, Color b, Color f)
+        {
+            cb.setLocation(locX,locY);
+            cb.setSize(sizX,sizY);
+            cb.setBackground(b);
+            cb.setForeground(f);
+        }
         
         protected static void setUpButton(JButton button, String n, String tText, int locX, int locY, int X, int Y, Color b, Color f, int mne, ImageIcon i)
         {
@@ -201,5 +234,69 @@ class SetUp
                 TitledBorder b = new TitledBorder(title);
                 b.setTitleColor(c);
                 return b;
+        }
+        
+        
+        protected static String getServerGroup(String a)
+        {
+            String b = "";
+            byte dN = 0, i = 0;
+        
+            while(dN != 3)
+            {
+                if(a.charAt(i) == '.') dN++;           
+                b += a.charAt(i++);
+            }        
+            b += "255";
+            System.out.println(b);
+            return b;
+        }
+        
+        protected static String getServerIP()
+        {
+            java.net.InetAddress i = null;
+            /*try
+            {
+                java.net.URL u = new java.net.URL("http://myip.xname.org/");
+
+                java.net.HttpURLConnection h = (java.net.HttpURLConnection)(u.openConnection());
+                java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader(h.getInputStream()));
+                ipadd = br.readLine();
+                System.out.println(ipadd);
+            }
+            catch(Exception e)
+            {}*/
+            try
+            {
+                i = java.net.InetAddress.getLocalHost();
+            }
+            catch (java.net.UnknownHostException x)
+            {
+            }
+            return ""+i.getHostAddress();
+        }
+        
+        
+        protected static void insertColorStrings(String s, Color c, boolean bold, JTextPane tp)
+        {
+            StyledDocument tpd = tp.getStyledDocument();
+            Style style = tp.addStyle("I'm a Style", null);
+            StyleConstants.setForeground(style, c);
+            StyleConstants.setBold(style, bold);
+            StyleConstants.setFontSize(style, 14);
+            
+            try
+            {
+                tpd.insertString(tpd.getLength(), s, style);
+            }
+            catch(BadLocationException e)
+            {}
+           /*tp.setEditable(false);
+           tp.setText(tp.getText() + "\n" + s);
+           MutableAttributeSet mas = tp.getInputAttributes();
+           StyledDocument tpd = tp.getStyledDocument();
+           
+           StyleConstants.setForeground(mas, c);
+           tpd.setCharacterAttributes((tp.getText().length()) - s.length() - 1, s.length() + 1, mas, false);*/
         }
 }

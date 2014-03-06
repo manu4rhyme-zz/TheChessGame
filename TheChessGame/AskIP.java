@@ -1,7 +1,7 @@
 /*  DEVELOPED BY    :                AVINASH AGARWAL  
- *  DATE                        :                1st April, 2011
+ *  DATE                        :                21st February, 2014
  *  PLATFORM             :                JAVA 1.6.0_24-b07
- *   PROGRAM             :                Multiple User Chat Messenger
+ *   PROGRAM             :                The Chess Game
  */
 
 import javax.swing.JTextField;
@@ -32,7 +32,7 @@ class AskIP implements ActionListener
     {
 
         SetUp.panel[1] = new JPanel();
-        SetUp.setUpPanel(SetUp.panel[1], 0, 0, 400, 325, SetUp.sColor, SetUp.titledBorderSetup("The Chess Game made by Avinash aka »Â†G«", Color.RED));
+        SetUp.setUpPanel(SetUp.panel[1], 0, 0, 400, 325, SetUp.sColor, SetUp.titledBorderSetup("The Chess Game vBETA", Color.RED));
 
         IP = new JLabel("Enter IP ", SwingConstants.CENTER);
         SetUp.setUpLabel(IP, "Enter IP  ", 0, 32, 150, 50, Color.BLACK, Color.WHITE, SetUp.normal);
@@ -55,15 +55,11 @@ class AskIP implements ActionListener
         SetUp.setUpButton(button, "Connect", "Connect to the entered IP on the given Port (Alt + C)",
             110, 155, 180, 60, Color.BLACK, Color.WHITE, KeyEvent.VK_C, SetUp.connect);
 
-        tFieldNum(port, "`~!@#$%^&*()_+=\\|\"':;?/><,.- ");
-
         if(SetUp.isServer)
         {
             SetUp.panel[1].setSize(400,350);
             button.setLocation(110,190);
             SetUp.status.setLocation(0,260);
-            
-            //games = new JComboBox(gameNames);
             
             color = new JLabel("Enter Color ", SwingConstants.CENTER);
             SetUp.setUpLabel(color, "Enter Color  ", 0, 120, 150, 50, Color.BLACK, Color.WHITE, SetUp.normal);
@@ -76,8 +72,20 @@ class AskIP implements ActionListener
         }
         else
         {
-            ip.setText("192.168.50.1");
-            port.setText("65483");
+            gameNames = new String[1];
+            gameNames[0] = "No Games Found";
+            
+            SetUp.panel[1].setSize(400,350);
+            button.setLocation(110,190);
+            SetUp.status.setLocation(0,260);
+            
+            games = new JComboBox(gameNames);
+            SetUp.setUpComboBox(games,70,140,260,25,Color.BLACK,Color.WHITE);
+          
+            SetUp.panel[1].add(games);
+            MultiCastClient mcc = new MultiCastClient(games, ip, port);
+            Thread mcct = new Thread(mcc);
+            mcct.start();
         }
 
         SetUp.panel[1].add(IP);
@@ -95,12 +103,14 @@ class AskIP implements ActionListener
         SetUp.panel[1].repaint();
 
         if(!SetUp.isServer) tFieldNum(ip, "`~!@#$%^&*()_+=\\|\"':;?/><,- ");
-        else 
-        {   
+        else
+        {
             Thread t = new Thread(new ServerIP());
             t.start();
         }
+       tFieldNum(port, "`~!@#$%^&*()_+=\\|\"':;?/><,.- ");
     }
+    
 
     public void actionPerformed(ActionEvent ae)
     {
@@ -201,36 +211,20 @@ class AskIP implements ActionListener
             ip.setEnabled(false);
             button.setEnabled(false);
             port.setEnabled(false);
-            colorTF.setEnabled(false);
+            //colorTF.setEnabled(false);
             SetUp.status.setText("Please Wait...");
-            String ipadd = "";
-            java.net.InetAddress i = null;
-            /*try
-            {
-            java.net.URL u = new java.net.URL("http://myip.xname.org/");
+            String ipadd = SetUp.getServerIP();
+           
 
-            java.net.HttpURLConnection h = (java.net.HttpURLConnection)(u.openConnection());
-            java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader(h.getInputStream()));
-            ipadd = br.readLine();
-            System.out.println(ipadd);
-            }
-            catch(Exception e)
-            {*/
-            try
+            if(SetUp.isServer)
             {
-                i = java.net.InetAddress.getLocalHost();
+                colorTF.setText("WHITE");
+                SetUp.status.setText("Click Connect");
             }
-            catch (java.net.UnknownHostException x)
-            {
-            }
-            ipadd = ""+i.getHostAddress();
-            //}
-
             ip.setText(ipadd);
-            port.setText("65483");
-            colorTF.setText("WHITE");
-            SetUp.status.setText("Click Connect");
+            port.setText("65483");            
             port.setEnabled(true);
+            port.setEditable(true);
             ip.setEnabled(true);
             ip.setEditable(true);
             button.setEnabled(true);

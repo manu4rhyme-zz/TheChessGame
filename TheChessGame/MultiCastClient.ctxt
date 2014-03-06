@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=cb\ ip\ port
+comment0.target=MultiCastClient(javax.swing.JComboBox,\ javax.swing.JTextField,\ javax.swing.JTextField)
+comment1.params=
+comment1.target=void\ run()
+comment2.params=ae
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment3.params=x
+comment3.target=void\ doActionChanges(int)
+numComments=4
