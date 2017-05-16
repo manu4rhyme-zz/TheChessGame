@@ -140,6 +140,12 @@ class AskIP implements ActionListener
                 {
                     SetUp.myColor = x;
                     Server ser = new Server(SetUp.HostPort, button, port);
+                    if(SetUp.isSinglePlayer)
+                    {
+                    	AIClient ac = new AIClient();
+                    	Thread t= new Thread(ac);
+                    	t.start();
+                    }
                 }
                 else SetUp.status.setText("Invalid Color");
             }           

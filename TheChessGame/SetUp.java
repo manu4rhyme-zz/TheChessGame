@@ -45,7 +45,7 @@ class SetUp
         protected static String myColor;
         protected static String[][] situation;
         
-        protected static ImageIcon host, join, connect, white, black, bBishopb, bBishopw, bKnightb, bKnightw, bPawnb, bPawnw, bRookb, bRookw, bQueenb, bQueenw, bKingw,
+        protected static ImageIcon host, join, connect, singlePlayer, white, black, bBishopb, bBishopw, bKnightb, bKnightw, bPawnb, bPawnw, bRookb, bRookw, bQueenb, bQueenw, bKingw,
                                                                       wBishopb, wBishopw, wKnightb, wKnightw, wPawnb, wPawnw, wRookb, wRookw, wQueenw, wQueenb, wKingb,
                                                                       bKingb, wKingw;
         protected static Image appImage;
@@ -59,7 +59,7 @@ class SetUp
         protected static int HostPort;  
         protected static int moveNum;
         
-        protected static boolean isServer, hostClosed, isSpec, isServerRunning, isClientListening;
+        protected static boolean isServer, hostClosed, isSpec, isServerRunning, isClientListening, isSinglePlayer;
         
         protected static Color sColor;
         protected static Font normal;
@@ -76,7 +76,8 @@ class SetUp
                 host = imageSetUp("host.png");
                 join = imageSetUp("join.png");
                 connect = imageSetUp("connect.png");
-                
+                singlePlayer = imageSetUp("Computer.png");
+
                 white = imageSetUp("basicSkin/white.png");
                 black = imageSetUp("basicSkin/black.png");
                 

@@ -24,7 +24,7 @@ import java.awt.Color;
 
 class FirstScreen implements ActionListener
 {
-            JButton host, join;
+            JButton host, join, singlePlayer;
             JTextField tf;
             JLabel label;           
             
@@ -38,13 +38,18 @@ class FirstScreen implements ActionListener
                     SetUp.setUpButton(join, "Join a Game", "Join a chess game hosted by someone else with his IP address (Alt + J)",
                                                100, 175, 200, 60, Color.BLACK, Color.WHITE, KeyEvent.VK_J, SetUp.join);
                      
+                    singlePlayer = new JButton();
+                    SetUp.setUpButton(singlePlayer, "Single Player Game", "Play a match against the computer (Alt + S)",
+                    									100, 255, 200, 60, Color.BLACK, Color.WHITE, KeyEvent.VK_S, SetUp.singlePlayer);
+
                     host.addActionListener(this);
                     join.addActionListener(this);
+                    singlePlayer.addActionListener(this);
                     
-                    SetUp.setUpFrame(SetUp.frame, "Host or Join a Game", 400, 350, SetUp.appImage, false, true);
+                    SetUp.setUpFrame(SetUp.frame, "Welcome to The Chess Game!", 400, 430, SetUp.appImage, false, true);
                     
                     SetUp.panel[0] = new JPanel();
-                    SetUp.setUpPanel(SetUp.panel[0], 0, 0, 400, 350, SetUp.sColor, SetUp.titledBorderSetup("The Chess Game vBETA", Color.YELLOW));
+                    SetUp.setUpPanel(SetUp.panel[0], 0, 0, 400, 430, SetUp.sColor, SetUp.titledBorderSetup("The Chess Game vBETA", Color.YELLOW));
                     
                     tf = new JTextField();
                     SetUp.setUpTextField(tf, 160, 33, 200, 25, Color.BLACK, Color.WHITE, "Enter your name here.", true, true);
@@ -54,12 +59,13 @@ class FirstScreen implements ActionListener
                     SetUp.setUpLabel(label, "Enter Name ", 4, 20, 150, 50, Color.BLACK, Color.WHITE, SetUp.normal);
                     
                     SetUp.status = new JLabel("",SwingConstants.CENTER);
-                    SetUp.setUpLabel(SetUp.status, "",  0, 250, 400, 50, Color.BLACK, Color.WHITE, SetUp.normal);
+                    SetUp.setUpLabel(SetUp.status, "",  0, 330, 400, 50, Color.BLACK, Color.WHITE, SetUp.normal);
                    
                     SetUp.panel[0].add(label);
                     SetUp.panel[0].add(tf);
                     SetUp.panel[0].add(host);
                     SetUp.panel[0].add(join);
+                    SetUp.panel[0].add(singlePlayer);
                     SetUp.panel[0].add(SetUp.status);
                     SetUp.frame.add(SetUp.panel[0]);
                     
@@ -74,14 +80,21 @@ class FirstScreen implements ActionListener
                       if(goodInput())
                       {
                             SetUp.name = tf.getText().trim();
+                            JButton source = (JButton)ae.getSource();
                             
-                            if((JButton)(ae.getSource()) == host)
+                            if(source == host)
                             {   
                                     SetUp.isServer = true;
                                     SetUp.names[0] = SetUp.name;
                             }
-                            new AskIP();
+                            else if(source == singlePlayer)
+                            {
+                            	SetUp.isServer = true;
+                            	SetUp.isSinglePlayer = true;
+                            	SetUp.names[0] = SetUp.name;
+                            }
                             
+                            new AskIP();                            
                       }       
             }
             

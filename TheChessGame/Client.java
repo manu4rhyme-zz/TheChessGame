@@ -21,7 +21,6 @@ class Client implements Runnable
 {
         private String ip;
         private JButton b;
-        private Thread t;
         protected static BufferedReader br;
         protected static PrintWriter pw;
         private JTextField port, ipF;

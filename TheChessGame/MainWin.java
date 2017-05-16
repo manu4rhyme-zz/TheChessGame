@@ -1,4 +1,4 @@
-/*  DEVELOPED BY    :                AVINASH AGARWAL  && SHIVAM TYAGI
+/*  DEVELOPED BY    :                AVINASH AGARWAL
  *  DATE                        :                25th February, 2014
  *  PLATFORM             :                JAVA 1.6.0_24-b07
  *   PROGRAM             :                The Chess Game
